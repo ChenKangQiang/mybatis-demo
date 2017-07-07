@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
  * Created by chen on 2017/6/29.
  */
 
+// 必须配置@component，这样spring才能识别该Bean
 @Component
 public interface UserMapper {
 
     User getUserById(int id);
 
-    void addUser(User user);
+    int addUser(User user);
 
     void deleteUserById(int id);
 

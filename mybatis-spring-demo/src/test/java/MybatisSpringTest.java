@@ -1,6 +1,7 @@
 import edu.tongji.comm.spring.demo.domain.User;
 import edu.tongji.comm.spring.demo.mappers.UserMapper;
 import edu.tongji.comm.spring.demo.mappers.UserMapperWithAnnotation;
+import edu.tongji.comm.typical.demo.utils.RandomUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
@@ -8,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Random;
 
 /**
  * Created by chen on 2017/6/29.
@@ -30,26 +33,45 @@ public class MybatisSpringTest {
 
     @Test
     public void testGetUserById() {
+
+        // 直接利用sqlSessionFactory
         SqlSession sqlSession = sqlSessionFactory.openSession();
-
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-
         User user = userMapper.getUserById(1);
 
         System.out.println(user);
-
         sqlSession.commit();
         sqlSession.close();
+
     }
 
     @Test
     public void testGetUserById2() {
 
-        User user = userMapper.getUserById(1);
-        User user2 = userMapperWithAnnotation.getUserById(2);
-        System.out.println(user);
+        // 直接利用userMapper
+        User user2 = userMapper.getUserById(2);
+        User user3 = userMapperWithAnnotation.getUserById(3);
         System.out.println(user2);
+        System.out.println(user3);
 
+    }
+
+
+    @Test
+    public void testAddUser() {
+        String username = RandomUtil.getRandomString(10);
+        String password = RandomUtil.getRandomString(10);
+        String email = username + "@dianping.com";
+
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+
+        userMapper.addUser(user);
+
+        // 打印刚插入的记录的Id
+        System.out.println(user.getId());
     }
 
 

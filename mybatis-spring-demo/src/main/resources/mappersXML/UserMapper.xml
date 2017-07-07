@@ -6,7 +6,7 @@
 <mapper namespace="edu.tongji.comm.spring.demo.mappers.UserMapper">
 
     <!-- 这里namespace必须是UserMapper接口的路径” -->
-    <insert id="addUser" parameterType="User">
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users (username, password, email, regdata)
         VALUES (#{username}, md5(#{password}), #{email}, NOW())
         <!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->

@@ -1,6 +1,7 @@
 import edu.tongji.comm.typical.demo.domain.User;
 import edu.tongji.comm.typical.demo.mappers.UserMapper;
 import edu.tongji.comm.typical.demo.mappers.UserMapperWithAnnotation;
+import edu.tongji.comm.typical.demo.utils.RandomUtil;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,8 +37,8 @@ public class MybatisTest {
     @Test
     public void testAddUser() {
 
-        String username = getRandomString(10);
-        String password = getRandomString(10);
+        String username = RandomUtil.getRandomString(10);
+        String password = RandomUtil.getRandomString(10);
         String email = username + "@dianping.com";
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -88,18 +89,5 @@ public class MybatisTest {
     }
 
 
-
-
-    /** 产生一个随机的字符串*/
-    public static String getRandomString(int length) {
-        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        Random random = new Random();
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            int num = random.nextInt(62);
-            builder.append(str.charAt(num));
-        }
-        return builder.toString();
-    }
 
 }

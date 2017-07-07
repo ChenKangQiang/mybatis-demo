@@ -8,7 +8,8 @@
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:property-placeholder location="classpath:db.properties"/>
-    <context:annotation-config />
+
+    <context:component-scan base-package="edu.tongji.comm.spring.demo.**" />
 
 
     <!--配置数据源，当在spring中使用mybatis时，一般不在mybatis-config中配置数据源-->
@@ -51,15 +52,26 @@
     <!--动态代理的实现:MapperFactoryBean。这个类可以让你直接注入数据映射器接口到你的 service层bean中；
     如果 UserMapper 有一个对应的 MyBatis 的 XML 映射器文件, 如果 XML 文件在类路径的位置和映射器类相同时, 它会被 MapperFactoryBean 自动解析。
     没有必要在 MyBatis 配置文件中去指定映射器 , 除非映射器的XML文件在不同的类路径下 。-->
+    <!--
     <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="edu.tongji.comm.spring.demo.mappers.UserMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
+    -->
 
-    <!-- 基于注解的userMapper的动态代理实现，-->
+    <!-- 基于注解的userMapper的动态代理实现-->
+    <!--
     <bean id="userMapperWithAnnotation" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="edu.tongji.comm.spring.demo.mappers.UserMapperWithAnnotation" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    -->
+
+    <!--没有必要在 Spring 中一一注册所有的映射器。
+        使用 MapperScannerConfigurer , 会自动查找类路径下的映射器并自动将他们创建成MapperFactoryBean。-->
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="edu.tongji.comm.spring.demo.mappers" />
     </bean>
 
 

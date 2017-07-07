@@ -2,12 +2,16 @@ package edu.tongji.comm.spring.demo.mappers;
 
 import edu.tongji.comm.spring.demo.domain.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by chen on 2017/6/29.
  * 不使用mapper xml，使用注解的形式
+ * 通常注解形式没有 xml 强大
  */
+
 @Mapper
+@Component
 public interface UserMapperWithAnnotation {
 
     @Select("SELECT * FROM users WHERE id = #{id}")
