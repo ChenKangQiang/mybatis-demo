@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.tongji.comm.spring.demo.mappers.UserMapper">
+
+    <!-- 这里namespace必须是UserMapper接口的路径” -->
+    <insert id="addUser" parameterType="User">
+        INSERT INTO users (username, password, email, regdata)
+        VALUES (#{username}, md5(#{password}), #{email}, NOW())
+        <!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->
+    </insert>
+
+    <!-- 这里的id必须和UserMapper接口中的接口方法名相同 -->
+    <select id="getUserById" resultType="User" parameterType="int">
+        SELECT * FROM users WHERE id = #{id}
+    </select>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE users SET username = #{username},
+                         password = md5(#{password}),
+                         email = #{email}
+                         WHERE id = #{id}
+    </update>
+
+    <delete id="deleteUserById" parameterType="int">
+        DELETE FROM users WHERE id = #{id}
+    </delete>
+</mapper>

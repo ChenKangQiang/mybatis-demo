@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:db.properties"/>
+
+    <context:annotation-config />
+
+
+    <!--配置数据源，当在spring中使用mybatis时，一般不在mybatis-config中配置数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置 mybatis 的 sqlSessionFactory ，sqlSessionFactory 的构建需要数据源和映射文件-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!--配置映射文件-->
+        <property name="mapperLocations" value="classpath*:mappersXML/*.xml" />
+        <!--配置别名-->
+        <property name="typeAliasesPackage" value="edu.tongji.comm.spring.demo.domain" />
+        <!--当然还是可以使用mybatis-config.xml文件-->
+        <!--<property name="configLocation" value="classpath*:mybatis-config.xml" />-->
+    </bean>
+
+
+    <!--没有必要在 Spring 中一一注册所有的映射器。
+    使用 MapperScannerConfigurer , 会自动查找类路径下的映射器
+    ，并自动将他们创建成MapperFactoryBean。-->
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="edu.tongji.comm.spring.demo.mappers" />
+    </bean>
+
+
+</beans>
