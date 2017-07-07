@@ -28,4 +28,12 @@ public class UserService {
         return userMapper.getUserById(id);
     }
 
+    public int updateUser(User user) {
+        return userMapper.updateUser(user);
+    }
+
+    public int deleteUser(int id) {
+        return userMapper.deleteUserById(id);
+    }
+
 }
