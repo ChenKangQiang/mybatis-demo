@@ -1,6 +1,7 @@
 import edu.tongji.comm.spring.demo.domain.User;
 import edu.tongji.comm.spring.demo.mappers.UserMapper;
 import edu.tongji.comm.spring.demo.mappers.UserMapperWithAnnotation;
+import edu.tongji.comm.spring.demo.services.UserService;
 import edu.tongji.comm.typical.demo.utils.RandomUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -31,6 +32,9 @@ public class MybatisSpringTest {
 
     @Autowired
     private UserMapperWithAnnotation userMapperWithAnnotation;
+
+    @Autowired
+    private UserService userService;
 
     @Test
     public void testGetUserById() {
@@ -69,7 +73,9 @@ public class MybatisSpringTest {
         user.setPassword(password);
         user.setEmail(email);
 
-        userMapper.addUser(user);
+//        userMapper.addUser(user);
+
+        userService.addUser(user);
 
         // 打印刚插入的记录的Id
         System.out.println(user.getId());

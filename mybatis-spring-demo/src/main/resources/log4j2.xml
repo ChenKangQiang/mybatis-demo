@@ -4,7 +4,7 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
             <!--可以配置过滤器，进一步控制输出的消息级别-->
-            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>-->
         </Console>
 
         <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用-->
@@ -30,6 +30,9 @@
             <!--<AppenderRef ref="RollingFile" />-->
         </Logger>
         <Logger name="edu.tongji.comm.spring.demo.mappers.UserMapperWithAnnotation" level="debug" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="edu.tongji.comm.spring.demo.services.UserService" level="info" additivity="false">
             <AppenderRef ref="Console" />
         </Logger>
         <!--未在log4j2.xml中配置的logger都会继承root logger-->
