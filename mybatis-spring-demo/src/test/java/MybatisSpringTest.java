@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -72,6 +73,12 @@ public class MybatisSpringTest {
 
         // 打印刚插入的记录的Id
         System.out.println(user.getId());
+    }
+
+    @Test
+    public void testGetUsers() {
+        List<User> users = userMapper.getUsers(50, 55);
+        System.out.println(users);
     }
 
 

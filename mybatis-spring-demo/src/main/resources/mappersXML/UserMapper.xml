@@ -27,4 +27,8 @@
     <delete id="deleteUserById" parameterType="int">
         DELETE FROM users WHERE id = #{id}
     </delete>
+
+    <select id="getUsers" resultType="User">
+        SELECT * FROM users WHERE id BETWEEN #{start} AND #{end};
+    </select>
 </mapper>

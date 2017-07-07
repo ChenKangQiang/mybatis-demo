@@ -43,10 +43,10 @@
     <!--配置 mybatis 的 sqlSessionFactory ，sqlSessionFactory 的构建需要数据源和映射文件-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+        <!--当然还是可以使用mybatis-config.xml文件，这里利用 mybatis-config.xml 来开启日志-->
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
         <property name="mapperLocations" value="classpath*:mappersXML/UserMapper.xml" />
         <property name="typeAliasesPackage" value="edu.tongji.comm.spring.demo.domain" />
-        <!--当然还是可以使用mybatis-config.xml文件-->
-        <!--<property name="configLocation" value="classpath*:mybatis-config.xml" />-->
     </bean>
 
     <!--动态代理的实现:MapperFactoryBean。这个类可以让你直接注入数据映射器接口到你的 service层bean中；

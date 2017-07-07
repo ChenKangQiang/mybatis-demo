@@ -1,18 +1,3 @@
-# mybatis-demo
-
-
-## mybatis配置log4j2
-
-1. 在 ``mybatis-config.xml``中开启日志功能
-```
-<configuration>
-    <settings>
-        <setting name="logImpl" value="LOG4J2" />
-    </settings>
-</configuration>
-```
-2. 在``src/main/resources``目录下添加``log4j2.xml``
-```
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO">
     <Appenders>
@@ -37,8 +22,14 @@
     </Appenders>
 
     <Loggers>
+        <!--additivity="false"可以防止打印两遍-->
         <!--将业务dao接口填写进去,并用控制台输出即可-->
         <Logger name="edu.tongji.comm.spring.demo.mappers.UserMapper" level="debug" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="FileLog" />
+            <!--<AppenderRef ref="RollingFile" />-->
+        </Logger>
+        <Logger name="edu.tongji.comm.spring.demo.mappers.UserMapperWithAnnotation" level="debug" additivity="false">
             <AppenderRef ref="Console" />
         </Logger>
         <!--未在log4j2.xml中配置的logger都会继承root logger-->
@@ -48,4 +39,3 @@
     </Loggers>
 
 </Configuration>
-```
