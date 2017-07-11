@@ -1,4 +1,4 @@
-package edu.tongji.comm.spring.demo.domain;
+package edu.tongji.comm.spring.demo.entity;
 
 
 import lombok.Data;

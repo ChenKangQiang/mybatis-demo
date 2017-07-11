@@ -1,6 +1,6 @@
-import edu.tongji.comm.spring.demo.domain.User;
-import edu.tongji.comm.spring.demo.mappers.UserMapper;
-import edu.tongji.comm.spring.demo.mappers.UserMapperWithAnnotation;
+import edu.tongji.comm.spring.demo.entity.User;
+import edu.tongji.comm.spring.demo.dao.UserMapper;
+import edu.tongji.comm.spring.demo.dao.UserMapperWithAnnotation;
 import edu.tongji.comm.spring.demo.services.UserService;
 import edu.tongji.comm.typical.demo.utils.RandomUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -12,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by chen on 2017/6/29.

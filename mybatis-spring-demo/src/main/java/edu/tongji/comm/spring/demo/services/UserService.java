@@ -1,18 +1,13 @@
 package edu.tongji.comm.spring.demo.services;
 
-import edu.tongji.comm.spring.demo.domain.User;
-import edu.tongji.comm.spring.demo.mappers.UserMapper;
+import edu.tongji.comm.spring.demo.dao.UserMapper;
+import edu.tongji.comm.spring.demo.entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 
 /**
  * Created by chen on 2017/6/29.

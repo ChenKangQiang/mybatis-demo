@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.tongji.comm.spring.demo.dao.JoyFootMonthEventDAO">
+
+    <resultMap id="joyFootMonthEventEntity" type="JoyFootMonthEventEntity">
+        <result property="userID" column="UserID"/>
+        <result property="platform" column="PlatForm"/>
+        <result property="platformCoupon" column="PlatFormCoupon"/>
+        <result property="platformCouponUsed" column="PlatFormCouponUsed"/>
+        <result property="shop0ID" column="Shop0ID"/>
+        <result property="shop0Coupon" column="Shop0Coupon"/>
+        <result property="shop0CouponUsed" column="Shop0CouponUsed"/>
+        <result property="shop1ID" column="Shop1ID"/>
+        <result property="shop1Coupon" column="Shop1Coupon"/>
+        <result property="shop1CouponUsed" column="Shop1CouponUsed"/>
+    </resultMap>
+
+    <select id="queryJoyFootMonthByUserID" parameterType="java.lang.Integer" resultType="joyFootMonthEventEntity">
+        SELECT
+        UserID,
+        PlatForm,
+        PlatFormCoupon,
+        PlatFormCouponUsed,
+        Shop0ID,
+        Shop0Coupon,
+        Shop0CouponUsed,
+        Shop1ID,
+        Shop1Coupon,
+        Shop1CouponUsed,
+        FROM JoyFootMonthEvent WHERE UserID = #{userID}
+    </select>
+
+    <insert id="insert" parameterType="JoyFootMonthEventEntity">
+        INSERT INTO JoyFootMonthEvent
+        (
+        PlatForm,
+        UserID,
+        PlatFormCoupon,
+        PlatFormCouponUsed,
+        Shop0ID,
+        Shop0Coupon,
+        Shop0CouponUsed,
+        Shop1ID,
+        Shop1Coupon,
+        Shop1CouponUsed,
+        AddTime,
+        UpdataTime
+        )
+        VALUES
+        (
+        #{platformentity.platform},
+        #{entity.userID},
+        #{entity.platformCoupon},
+        #{entity.platformCouponUsed}
+        #{entity.shop0ID},
+        #{entity.shop0Coupon},
+        #{entity.shop0CouponUsed},
+        #{entity.shop1ID},
+        #{entity.shop1Coupon},
+        #{entity.shop1CouponUsed},
+        NOW(),
+        NOW()
+        )
+    </insert>
+
+    <update id="updateCouponStatus" parameterType="JoyFootMonthEventEntity">
+        UPDATE JoyFootMonthEvent SET
+        PlatFormCouponUsed = #{entity.platformCouponUsed},
+        Shop0CouponUsed = #{entity.shop0CouponUsed},
+        Shop1CouponUsed = #{entity.shop1CouponUsed},
+        UpdataTime = NOW()
+        WHERE UserID = #{entity.userID}
+    </update>
+
+</mapper>

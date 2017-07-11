@@ -1,6 +1,6 @@
-package edu.tongji.comm.spring.demo.mappers;
+package edu.tongji.comm.spring.demo.dao;
 
-import edu.tongji.comm.spring.demo.domain.User;
+import edu.tongji.comm.spring.demo.entity.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 

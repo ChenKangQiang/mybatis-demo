@@ -55,8 +55,8 @@
         <property name="dataSource" ref="dataSource" />
         <!--当然还是可以使用mybatis-config.xml文件，这里利用 mybatis-config.xml 来开启日志-->
         <property name="configLocation" value="classpath:mybatis-config.xml" />
-        <property name="mapperLocations" value="classpath*:mappersXML/UserMapper.xml" />
-        <property name="typeAliasesPackage" value="edu.tongji.comm.spring.demo.domain" />
+        <property name="mapperLocations" value="classpath*:mappersXML/*.xml" />
+        <property name="typeAliasesPackage" value="edu.tongji.comm.spring.demo.entity" />
     </bean>
 
 
@@ -82,7 +82,7 @@
         使用 MapperScannerConfigurer , 会自动查找类路径下的映射器并自动将他们创建成MapperFactoryBean。-->
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="edu.tongji.comm.spring.demo.mappers" />
+        <property name="basePackage" value="edu.tongji.comm.spring.demo.dao" />
     </bean>
 
 
