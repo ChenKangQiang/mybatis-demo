@@ -1,6 +1,6 @@
 import edu.tongji.comm.spring.demo.entity.User;
-import edu.tongji.comm.spring.demo.dao.UserMapper;
-import edu.tongji.comm.spring.demo.dao.UserMapperWithAnnotation;
+import edu.tongji.comm.spring.demo.dao.UserDAO;
+import edu.tongji.comm.spring.demo.dao.UserDAOWithAnnotation;
 import edu.tongji.comm.spring.demo.services.UserService;
 import edu.tongji.comm.typical.demo.utils.RandomUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -27,10 +27,10 @@ public class MybatisSpringTest {
 
     // 直接注入数据映射器
     @Autowired
-    private UserMapper userMapper;
+    private UserDAO userDAO;
 
     @Autowired
-    private UserMapperWithAnnotation userMapperWithAnnotation;
+    private UserDAOWithAnnotation userDAOWithAnnotation;
 
     @Autowired
     private UserService userService;
@@ -40,7 +40,7 @@ public class MybatisSpringTest {
 
         // 直接利用sqlSessionFactory
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        UserDAO userMapper = sqlSession.getMapper(UserDAO.class);
         User user = userMapper.getUserById(1);
 
         System.out.println(user);
@@ -53,8 +53,8 @@ public class MybatisSpringTest {
     public void testGetUserById2() {
 
         // 直接利用userMapper
-        User user2 = userMapper.getUserById(2);
-        User user3 = userMapperWithAnnotation.getUserById(3);
+        User user2 = userDAO.getUserById(2);
+        User user3 = userDAOWithAnnotation.getUserById(3);
         System.out.println(user2);
         System.out.println(user3);
 
@@ -82,7 +82,7 @@ public class MybatisSpringTest {
 
     @Test
     public void testGetUsers() {
-        List<User> users = userMapper.getUsers(50, 55);
+        List<User> users = userDAO.getUsers(50, 55);
         System.out.println(users);
     }
 

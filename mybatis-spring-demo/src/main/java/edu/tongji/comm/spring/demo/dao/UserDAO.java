@@ -12,7 +12,7 @@ import java.util.List;
 
 // 必须配置@component或者@Repository，这样spring才能识别该Bean
 @Component
-public interface UserMapper {
+public interface UserDAO {
 
     User getUserById(int id);
 

@@ -2,7 +2,6 @@ package edu.tongji.comm.spring.demo.services;
 
 
 import edu.tongji.comm.spring.demo.request.JoyFootMonthReqDTO;
-import edu.tongji.comm.spring.demo.request.JoyFootMonthUpdateReqDTO;
 import edu.tongji.comm.spring.demo.response.JoyFootMonthRespDTO;
 
 public interface JoyEventService {
@@ -30,5 +29,5 @@ public interface JoyEventService {
      * @param reqDTO
      * @return
      */
-    JoyFootMonthRespDTO updateJoyFootMonthCouponStatus(JoyFootMonthUpdateReqDTO reqDTO);
+    JoyFootMonthRespDTO updateJoyFootMonthCouponStatus(JoyFootMonthReqDTO reqDTO);
 }

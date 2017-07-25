@@ -10,10 +10,10 @@ import java.io.Serializable;
 
 @Data
 public class JoyFootMonthRespDTO implements Serializable {
-    private Integer userID;
-    private Integer platform;
-    private Integer platformCoupon;
-    private Integer platformCouponUsed;
+    private Integer platForm;
+    private Long userID;
+    private Integer platFormCoupon;
+    private Integer platFormCouponUsed;
     private Integer shop0ID;
     private Integer shop0Coupon;
     private Integer shop0CouponUsed;

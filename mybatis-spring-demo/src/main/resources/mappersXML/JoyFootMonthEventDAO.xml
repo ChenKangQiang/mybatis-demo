@@ -6,10 +6,10 @@
 <mapper namespace="edu.tongji.comm.spring.demo.dao.JoyFootMonthEventDAO">
 
     <resultMap id="joyFootMonthEventEntity" type="JoyFootMonthEventEntity">
+        <result property="platForm" column="PlatForm"/>
         <result property="userID" column="UserID"/>
-        <result property="platform" column="PlatForm"/>
-        <result property="platformCoupon" column="PlatFormCoupon"/>
-        <result property="platformCouponUsed" column="PlatFormCouponUsed"/>
+        <result property="platFormCoupon" column="PlatFormCoupon"/>
+        <result property="platFormCouponUsed" column="PlatFormCouponUsed"/>
         <result property="shop0ID" column="Shop0ID"/>
         <result property="shop0Coupon" column="Shop0Coupon"/>
         <result property="shop0CouponUsed" column="Shop0CouponUsed"/>
@@ -18,7 +18,7 @@
         <result property="shop1CouponUsed" column="Shop1CouponUsed"/>
     </resultMap>
 
-    <select id="queryJoyFootMonthByUserID" parameterType="java.lang.Integer" resultType="joyFootMonthEventEntity">
+    <select id="queryJoyFootMonthByUserID" resultType="joyFootMonthEventEntity">
         SELECT
         UserID,
         PlatForm,
@@ -29,8 +29,8 @@
         Shop0CouponUsed,
         Shop1ID,
         Shop1Coupon,
-        Shop1CouponUsed,
-        FROM JoyFootMonthEvent WHERE UserID = #{userID}
+        Shop1CouponUsed
+        FROM JoyFootMonthEvent WHERE PlatForm = #{platForm} AND UserID = #{userID}
     </select>
 
     <insert id="insert" parameterType="JoyFootMonthEventEntity">
@@ -53,8 +53,8 @@
         (
         #{platformentity.platform},
         #{entity.userID},
-        #{entity.platformCoupon},
-        #{entity.platformCouponUsed}
+        #{entity.platFormCoupon},
+        #{entity.platFormCouponUsed}
         #{entity.shop0ID},
         #{entity.shop0Coupon},
         #{entity.shop0CouponUsed},
@@ -72,7 +72,7 @@
         Shop0CouponUsed = #{entity.shop0CouponUsed},
         Shop1CouponUsed = #{entity.shop1CouponUsed},
         UpdataTime = NOW()
-        WHERE UserID = #{entity.userID}
+        WHERE PlatForm = #{entity.platForm} AND UserID = #{entity.userID}
     </update>
 
 </mapper>

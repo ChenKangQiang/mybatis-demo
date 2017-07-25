@@ -8,10 +8,10 @@ import lombok.Data;
 
 @Data
 public class JoyFootMonthEventEntity {
-    private Integer platform;
-    private Integer userID;
-    private Integer platformCoupon;
-    private Integer platformCouponUsed;
+    private Integer platForm;
+    private Long userID;
+    private Integer platFormCoupon;
+    private Integer platFormCouponUsed;
     private Integer shop0ID;
     private Integer shop0Coupon;
     private Integer shop0CouponUsed;

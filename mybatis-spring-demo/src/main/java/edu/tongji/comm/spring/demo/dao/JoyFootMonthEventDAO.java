@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JoyFootMonthEventDAO {
 
-    JoyFootMonthEventEntity queryJoyFootMonthByUserID(@Param("userID") Integer userID);
+    JoyFootMonthEventEntity queryJoyFootMonthByUserID(@Param("platForm") Integer platForm, @Param("userID") Long userID);
 
     void insert(@Param("entity") JoyFootMonthEventEntity entity);
 

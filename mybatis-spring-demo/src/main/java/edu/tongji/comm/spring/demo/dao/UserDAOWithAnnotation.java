@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Mapper
 @Component
-public interface UserMapperWithAnnotation {
+public interface UserDAOWithAnnotation {
 
     @Select("SELECT * FROM users WHERE id = #{id}")
     User getUserById(int id);

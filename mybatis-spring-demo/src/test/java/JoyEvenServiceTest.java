@@ -24,18 +24,36 @@ public class JoyEvenServiceTest {
     private JoyFootMonthEventDAO joyFootMonthEventDAO;
 
     @Test
-    public void test() {
+    public void testQueryJoyFootMonthByUserID() {
 
         System.out.println(joyFootMonthEventDAO);
         System.out.println(joyEventServiceImpl);
 
         JoyFootMonthReqDTO reqDTO = new JoyFootMonthReqDTO();
-        reqDTO.setUserID(1);
-        reqDTO.setPlatform(1);
+
+        // 数据库中已经存在，查询券信息
+        reqDTO.setUserID(new Long(1));
+        reqDTO.setPlatForm(1);
 
         JoyFootMonthRespDTO respDTO = joyEventServiceImpl.queryJoyFootMonthByUserID(reqDTO);
 
         System.out.println(respDTO);
     }
+
+
+    @Test
+    public void testAddJoyFootMonthByUserIDD() {
+
+        JoyFootMonthReqDTO reqDTO = new JoyFootMonthReqDTO();
+        reqDTO.setUserID(new Long(99));
+        reqDTO.setPlatForm(1);
+
+        JoyFootMonthRespDTO respDTO = joyEventServiceImpl.queryJoyFootMonthByUserID(reqDTO);
+
+        System.out.println(respDTO);
+    }
+
+
+
 
 }

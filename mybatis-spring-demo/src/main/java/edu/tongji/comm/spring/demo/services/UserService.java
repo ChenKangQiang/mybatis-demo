@@ -1,6 +1,6 @@
 package edu.tongji.comm.spring.demo.services;
 
-import edu.tongji.comm.spring.demo.dao.UserMapper;
+import edu.tongji.comm.spring.demo.dao.UserDAO;
 import edu.tongji.comm.spring.demo.entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +19,24 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserDAO userDAO;
 
     public void addUser(User user) {
         log.info("向数据库增加用户记录");
-        userMapper.addUser(user);
+        userDAO.addUser(user);
     }
 
     public User getUser(int id) {
 
-        return userMapper.getUserById(id);
+        return userDAO.getUserById(id);
     }
 
     public int updateUser(User user) {
-        return userMapper.updateUser(user);
+        return userDAO.updateUser(user);
     }
 
     public int deleteUser(int id) {
-        return userMapper.deleteUserById(id);
+        return userDAO.deleteUserById(id);
     }
 
 }
