@@ -3,15 +3,20 @@ import edu.tongji.comm.spring.demo.dao.UserDAO;
 import edu.tongji.comm.spring.demo.dao.UserDAOWithAnnotation;
 import edu.tongji.comm.spring.demo.services.UserService;
 import edu.tongji.comm.typical.demo.utils.RandomUtil;
+import org.apache.commons.lang3.Validate;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by chen on 2017/6/29.
@@ -63,22 +68,137 @@ public class MybatisSpringTest {
 
     @Test
     public void testAddUser() {
-        String username = RandomUtil.getRandomString(10);
+        List<User> users = new ArrayList<>();
+        for (int i = 0 ; i < 3; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String username = RandomUtil.getRandomString(10);
+                    String password = RandomUtil.getRandomString(10);
+                    String email = username + "@dianping.com";
+
+                    User user = new User();
+                    user.setUsername(username);
+                    user.setPassword(password);
+                    user.setEmail(email);
+
+                    int effectrow = userDAO.addUser(user); // 成功为1
+                    //打印刚插入的记录的Id
+                    System.out.println(user.getId());
+                    System.out.println(effectrow);
+                    users.add(user);
+                }
+            }).start();
+        }
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    @Test
+    public void testInsertIgnore() {
         String password = RandomUtil.getRandomString(10);
-        String email = username + "@dianping.com";
 
         User user = new User();
-        user.setUsername(username);
+        user.setUsername("Zhangshan");
         user.setPassword(password);
-        user.setEmail(email);
+        user.setEmail("zhangshan@dianping.com");
 
-//        userMapper.addUser(user);
 
-        userService.addUser(user);
-
-        // 打印刚插入的记录的Id
+        int effectrow = userDAO.addUser(user);
+        System.out.println(effectrow);
         System.out.println(user.getId());
     }
+
+    @Test
+    public void testInsertIgnoreNew() {
+        String password = RandomUtil.getRandomString(10);
+
+        User user = new User();
+        user.setUsername("Zhangshan");
+        user.setPassword(password);
+        user.setEmail("zhangshan@dianping.com");
+
+        try {
+            int effectrow = userDAO.addUser(user);
+            System.out.println(effectrow);
+            System.out.println(user.getId());
+        } catch (DuplicateKeyException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testInsertUser1() {
+        List<User> users = new ArrayList<>();
+        for (int i = 0 ; i < 3; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String username = RandomUtil.getRandomString(10);
+                    String password = RandomUtil.getRandomString(10);
+                    String email = username + "@dianping.com";
+
+                    User user = new User();
+                    user.setUsername(username);
+                    user.setPassword(password);
+                    user.setEmail(email);
+
+                    int effectrow = userDAO.addUser(user); // 成功为1
+                    //打印刚插入的记录的Id
+                    System.out.println(user.getId());
+                    System.out.println(effectrow);
+                    users.add(user);
+                }
+            }).start();
+        }
+
+        try {
+            TimeUnit.SECONDS.sleep(4);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void testInsertUser2() {
+        List<User> users = new ArrayList<>();
+        for (int i = 0 ; i < 3; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String username = RandomUtil.getRandomString(10);
+                    String password = RandomUtil.getRandomString(10);
+                    String email = username + "@dianping.com";
+
+                    User user = new User();
+                    user.setUsername(username);
+                    user.setPassword(password);
+                    user.setEmail(email);
+
+                    int effectrow = userDAO.addUser(user); // 成功为1
+                    //打印刚插入的记录的Id
+                    System.out.println(user.getId());
+                    System.out.println(effectrow);
+                    users.add(user);
+                }
+            }).start();
+        }
+
+        try {
+            TimeUnit.SECONDS.sleep(4);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Test
     public void testGetUsers() {

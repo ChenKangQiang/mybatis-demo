@@ -18,6 +18,15 @@ public interface UserDAO {
 
     int addUser(User user);
 
+    int ignoreInsert(User user);
+
+    int ignoreInsertNew(User user);
+
+
+    int insertUser2(User user);
+
+    int insertUser1(User user);
+
     int deleteUserById(int id);
 
     int updateUser(User user);
